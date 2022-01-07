@@ -124,7 +124,7 @@ class PAWData:
         self.exact_exchange_X_matrix =  np.fromstring(exact_exchange_X_matrix.childNodes[0].data, sep=" ")
 
 
-    def dump_vars(self):
+    def vardump(self):
         print("# atom_symbol = %s" % self.atom_symbol)
         print("# atom_Z = %s" % self.atom_Z)
         print("# atom_core = %s" % self.atom_core)

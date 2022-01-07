@@ -65,7 +65,7 @@ class PAWData:
         self.radial_grid_iend = int(radial_grid.getAttribute("iend"))
         self.radial_grid_id = radial_grid.getAttribute("id")
         values = radial_grid.getElementsByTagName("values")[0]
-        self.radial_grid_values = np.fromstring(values.childNodes[0].data, sep=" ")
+        self.radial_grid = np.fromstring(values.childNodes[0].data, sep=" ")
         derivatives = radial_grid.getElementsByTagName("derivatives")[0]
         self.radial_grid_derivatives = np.fromstring(derivatives.childNodes[0].data, sep=" ")
 

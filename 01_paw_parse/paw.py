@@ -42,14 +42,20 @@ class PAW:
         valence_states = paw_dataset.getElementsByTagName("valence_states")[0]
         self.state_l = {}
         self.state_n = {}
-
+        self.state_f = {}
+        self.state_rc = {}
+        self.state_e = {}
         for state in valence_states.getElementsByTagName("state"):
             state_id = state.getAttribute("id")
-            state_l = state.getAttribute("l")
             state_n = state.getAttribute("n")
-            self.state_l[state_id] = int(state_l)
             if state_n.strip():
                 self.state_n[state_id] = int(state_n)
+            state_f = state.getAttribute("f")
+            if state_f.strip():
+                self.state_f[state_id] = float(state_f)
+            self.state_rc[state_id] = float(state.getAttribute("rc"))
+            self.state_l[state_id] = float(state.getAttribute("l"))
+            self.state_e[state_id] = float(state.getAttribute("e"))
 
         radial_grid = paw_dataset.getElementsByTagName("radial_grid")[0]
         self.radial_grid_eq = radial_grid.getAttribute("eq")
@@ -133,6 +139,16 @@ class PAW:
         print("# ae_energy_total = %s" % self.ae_energy_total)
         print("# core_energy_kinetic = %s" % self.core_energy_kinetic)
         print("# paw_radius_rc = %s" % self.paw_radius_rc)
+
+        for state_id in self.state_rc:
+            print("# state_l[%s] = %s" % (state_id, self.state_l[state_id]))
+            print("# state_e[%s] = %s" % (state_id, self.state_e[state_id]))
+            print("# state_rc[%s] = %s" % (state_id, self.state_rc[state_id]))
+            if state_id in self.state_n:
+                print("# state_n[%s] = %s" % (state_id, self.state_n[state_id]))
+            if state_id in self.state_f:
+                print("# state_f[%s] = %s" % (state_id, self.state_f[state_id]))
+
         print("# radial_grid_eq = %s" % self.radial_grid_eq)
         print("# radial_grid_a = %s" % self.radial_grid_a)
         print("# radial_grid_d = %s" % self.radial_grid_d)

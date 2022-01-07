@@ -38,11 +38,19 @@ class PAW:
 
         paw_radius = paw_dataset.getElementsByTagName("paw_radius")[0]
         self.paw_radius_rc = float(paw_radius.getAttribute("rc"))
-         
+        
         valence_states = paw_dataset.getElementsByTagName("valence_states")[0]
-        for state in valence_states.getElementsByTagName("states"):
-            pass
-            
+        self.state_l = {}
+        self.state_n = {}
+
+        for state in valence_states.getElementsByTagName("state"):
+            state_id = state.getAttribute("id")
+            state_l = state.getAttribute("l")
+            state_n = state.getAttribute("n")
+            self.state_l[state_id] = int(state_l)
+            if state_n.strip():
+                self.state_n[state_id] = int(state_n)
+
         radial_grid = paw_dataset.getElementsByTagName("radial_grid")[0]
         self.radial_grid_eq = radial_grid.getAttribute("eq")
         self.radial_grid_a = float(radial_grid.getAttribute("a"))

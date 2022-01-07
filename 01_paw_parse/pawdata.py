@@ -180,8 +180,6 @@ class PAWData:
         print("# zero_potential = %s" % self.zero_potential)
 
 
-paw = PAW("Na.xml.gz")
-paw.dump_vars()
 
 
 
